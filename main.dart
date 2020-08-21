@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-final File file = File('index.html');
+final File file = File('users.json');
 
 Future main() async {
   HttpServer server;
@@ -16,7 +16,7 @@ Future main() async {
   await for (var req in server) {
     if (await file.exists()) {
       print('Serving ${file.path}');
-      req.response.headers.contentType = ContentType.html;
+      req.response.headers.contentType = ContentType.json;
 
       try {
         await file.openRead().pipe(req.response);
